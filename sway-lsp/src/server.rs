@@ -80,6 +80,7 @@ fn capabilities() -> ServerCapabilities {
             ..Default::default()
         }),
         // document_formatting_provider: Some(OneOf::Left(true)),
+        hover_provider: Some(HoverProviderCapability::Simple(true)),
         definition_provider: Some(OneOf::Left(true)),
         ..ServerCapabilities::default()
     }

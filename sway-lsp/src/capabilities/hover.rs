@@ -4,6 +4,7 @@ use crate::{
         token::{AstToken, Token, TypedAstToken},
     },
     utils::{
+        attributes::doc_attributes,
         common::{extract_visibility, get_range_from_span},
         function::extract_fn_signature,
         token::to_ident_key,
@@ -33,9 +34,22 @@ pub fn hover_data(session: &Session, params: HoverParams) -> Option<Hover> {
     None
 }
 
+#[allow(dead_code)]
+fn format_doc_attributes(token: &Token) -> String {
+    let mut doc_comment = String::new();
+    if let Some(attributes) = doc_attributes(token) {
+        doc_comment = attributes.iter().map(|attribute| {
+            let comment = attribute.args.first().unwrap().as_str();
+            format!("{}\n", comment)
+        }).collect()
+    }
+    doc_comment
+}
+
 fn hover_format(token: &Token, ident: &Ident) -> Hover {
     let token_name: String = ident.as_str().into();
     let range = get_range_from_span(&ident.span());
+    let doc_comment = format_doc_attributes(token);
 
     let format_visibility_hover = |visibility: Visibility, decl_name: &str| -> String {
         format!(
@@ -107,7 +121,7 @@ fn hover_format(token: &Token, ident: &Ident) -> Hover {
 
     Hover {
         contents: HoverContents::Markup(MarkupContent {
-            value: format!("```sway\n{}\n```", value),
+            value: doc_comment,// format!("```sway\n{}\n```", value),
             kind: MarkupKind::Markdown,
         }),
         range: Some(range),
