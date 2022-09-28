@@ -1,6 +1,7 @@
 use crate::{error::*, parse_tree::*, semantic_analysis::*, type_system::*};
 
 use sway_types::{Ident, Spanned};
+use sway_error::error::CompileError;
 
 /// Given an enum declaration and the instantiation expression/type arguments, construct a valid
 /// [TypedExpression].

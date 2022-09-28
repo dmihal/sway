@@ -16,6 +16,7 @@ pub(crate) use virtual_register::*;
 use crate::{asm_generation::DataId, error::*, parse_tree::AsmRegister, Ident};
 
 use sway_types::{span::Span, Spanned};
+use sway_error::error::CompileError;
 
 use either::Either;
 use std::{

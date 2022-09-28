@@ -5,9 +5,10 @@ use crate::{
         TypedExpressionVariant, TypedVariableDeclaration, VariableMutability,
     },
     type_system::*,
-    CompileError, CompileResult, FunctionParameter, Ident, Namespace, TypedDeclaration,
+    CompileResult, FunctionParameter, Ident, Namespace, TypedDeclaration,
 };
 
+use sway_error::error::CompileError;
 use sway_types::{span::Span, Spanned};
 
 #[derive(Debug, Clone, Eq)]

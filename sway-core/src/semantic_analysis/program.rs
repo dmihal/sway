@@ -19,6 +19,7 @@ use sway_types::{
     span::Span, Ident, JsonABIProgram, JsonLoggedType, JsonTypeApplication, JsonTypeDeclaration,
     Spanned,
 };
+use sway_error::error::CompileError;
 
 #[derive(Debug)]
 pub struct TypedProgram {

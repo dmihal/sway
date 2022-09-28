@@ -4,6 +4,7 @@ use crate::{
 };
 use std::collections::{hash_map::RandomState, HashMap, VecDeque};
 use sway_types::{state::StateIndex, Spanned};
+use sway_error::error::CompileError;
 
 #[allow(clippy::too_many_arguments)]
 pub(crate) fn instantiate_function_application(

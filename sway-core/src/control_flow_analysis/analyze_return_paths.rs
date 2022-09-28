@@ -4,13 +4,13 @@
 use crate::{
     control_flow_analysis::*,
     declaration_engine::declaration_engine::{de_get_function, de_get_impl_trait},
-    error::*,
     parse_tree::*,
     semantic_analysis::*,
     type_system::*,
 };
 use petgraph::prelude::NodeIndex;
 use sway_types::{ident::Ident, span::Span, Spanned};
+use sway_error::error::CompileError;
 
 impl ControlFlowGraph {
     pub(crate) fn construct_return_path_graph(

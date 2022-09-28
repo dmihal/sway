@@ -1,6 +1,7 @@
 use std::collections::{HashMap, HashSet};
 
 use sway_types::{Ident, Span, Spanned};
+use sway_error::error::CompileError;
 
 use crate::{
     declaration_engine::declaration_engine::*,
@@ -13,7 +14,7 @@ use crate::{
         insert_type, look_up_type_id, set_type_as_storage_only, to_typeinfo, unify_with_self,
         CopyTypes, TypeId, TypeMapping, TypeParameter,
     },
-    CallPath, CompileError, CompileResult, FunctionDeclaration, ImplSelf, ImplTrait, Purity,
+    CallPath, CompileResult, FunctionDeclaration, ImplSelf, ImplTrait, Purity,
     TypeInfo, TypedDeclaration, TypedFunctionDeclaration,
 };
 

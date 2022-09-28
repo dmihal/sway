@@ -1,5 +1,6 @@
-use crate::{Parse, ParseBracket, ParseErrorKind, ParseResult, Parser};
+use crate::{Parse, ParseBracket, ParseResult, Parser};
 
+use sway_error::parser_error::ParseErrorKind;
 use sway_ast::{Braces, ItemUse, UseTree};
 
 impl Parse for UseTree {

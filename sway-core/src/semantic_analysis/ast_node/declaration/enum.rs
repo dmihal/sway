@@ -10,6 +10,7 @@ use crate::{
 };
 use std::hash::{Hash, Hasher};
 use sway_types::{Ident, Span, Spanned};
+use sway_error::error::CompileError;
 
 #[derive(Clone, Debug, Eq)]
 pub struct TypedEnumDeclaration {

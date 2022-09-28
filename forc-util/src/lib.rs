@@ -10,9 +10,11 @@ use std::ffi::OsStr;
 use std::path::{Path, PathBuf};
 use std::str;
 use std::{env, io};
-use sway_core::{error::LineCol, CompileError, CompileWarning, TreeType};
+use sway_core::{CompileWarning, TreeType};
+use sway_types::span::LineCol;
 use sway_types::Spanned;
 use sway_utils::constants;
+use sway_error::error::CompileError;
 use tracing::{Level, Metadata};
 use tracing_subscriber::{
     filter::{EnvFilter, LevelFilter},
@@ -231,7 +233,7 @@ fn println_std_err(txt: &str, color: Colour) {
     tracing::error!("{}", color.paint(txt));
 }
 
-fn format_err(err: &sway_core::CompileError) {
+fn format_err(err: &CompileError) {
     let span = err.span();
     let input = span.input();
     let path = err.path();
@@ -247,7 +249,7 @@ fn format_err(err: &sway_core::CompileError) {
             annotation_type: AnnotationType::Error,
         });
 
-        let (mut start, end) = err.line_col();
+        let (mut start, end) = err.span().line_col();
         let input = construct_window(&mut start, end, &mut start_pos, &mut end_pos, input);
         let slices = vec![Slice {
             source: input,
@@ -299,7 +301,7 @@ fn format_warning(err: &sway_core::CompileWarning) {
         end_pos += 1;
     }
 
-    let (mut start, end) = err.line_col();
+    let (mut start, end) = err.span.line_col();
     let input = construct_window(&mut start, end, &mut start_pos, &mut end_pos, input);
     let snippet = Snippet {
         title: Some(Annotation {

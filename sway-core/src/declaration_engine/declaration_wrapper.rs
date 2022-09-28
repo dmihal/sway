@@ -1,6 +1,7 @@
 use std::fmt;
 
 use sway_types::Span;
+use sway_error::error::CompileError;
 
 use crate::{
     semantic_analysis::{
@@ -8,7 +9,7 @@ use crate::{
         TypedStorageDeclaration, TypedStructDeclaration, TypedTraitDeclaration, TypedTraitFn,
     },
     type_system::{CopyTypes, TypeMapping},
-    CompileError, TypedFunctionDeclaration,
+    TypedFunctionDeclaration,
 };
 
 /// The [DeclarationWrapper] type is used in the [DeclarationEngine]

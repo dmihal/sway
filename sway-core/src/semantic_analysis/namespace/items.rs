@@ -10,6 +10,7 @@ use crate::{
 use super::TraitMap;
 
 use sway_types::{span::Span, Spanned};
+use sway_error::error::CompileError;
 
 use std::sync::Arc;
 

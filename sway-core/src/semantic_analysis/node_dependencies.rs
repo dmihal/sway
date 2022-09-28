@@ -12,6 +12,7 @@ use crate::{
 
 use sway_types::Spanned;
 use sway_types::{ident::Ident, span::Span};
+use sway_error::error::CompileError;
 
 // -------------------------------------------------------------------------------------------------
 /// Take a list of nodes and reorder them so that they may be semantically analysed without any

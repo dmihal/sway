@@ -1,5 +1,4 @@
 use crate::{
-    error::CompileError,
     semantic_analysis::{
         ProjectionKind, TypeCheckedStorageAccessDescriptor, TypeCheckedStorageReassignDescriptor,
         TypedEnumVariant,
@@ -11,6 +10,7 @@ use super::convert::convert_resolved_typeid_no_span;
 
 use sway_ir::{Aggregate, Context, Type};
 use sway_types::span::Spanned;
+use sway_error::error::CompileError;
 
 pub(super) fn create_enum_aggregate(
     context: &mut Context,

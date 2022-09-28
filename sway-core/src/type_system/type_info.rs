@@ -1,6 +1,7 @@
 use super::*;
 use crate::{semantic_analysis::*, CallPath, Ident};
 use sway_types::span::Span;
+use sway_error::error::CompileError;
 
 use derivative::Derivative;
 use std::{

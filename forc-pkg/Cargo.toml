@@ -20,6 +20,7 @@ serde = { version = "1.0", features = ["derive"] }
 serde_ignored = "0.1"
 serde_json = "1.0"
 sway-core = { version = "0.24.5", path = "../sway-core" }
+sway-error = { version = "0.24.5", path = "../sway-error" }
 sway-types = { version = "0.24.5", path = "../sway-types" }
 sway-utils = { version = "0.24.5", path = "../sway-utils" }
 toml = "0.5"

@@ -7,9 +7,7 @@ use super::{
 };
 use crate::{
     asm_generation::from_ir::ir_type_size_in_bytes,
-    constants,
     declaration_engine::declaration_engine,
-    error::{CompileError, Hint},
     ir_generation::const_eval::{
         compile_constant_expression, compile_constant_expression_to_constant,
     },
@@ -18,9 +16,11 @@ use crate::{
     semantic_analysis::*,
     type_system::{look_up_type_id, to_typeinfo, IntegerBits, TypeId, TypeInfo},
 };
+use sway_error::error::{CompileError, Hint};
 use sway_ast::intrinsics::Intrinsic;
 use sway_ir::{Context, *};
 use sway_types::{
+    constants,
     ident::Ident,
     span::{Span, Spanned},
     state::StateIndex,

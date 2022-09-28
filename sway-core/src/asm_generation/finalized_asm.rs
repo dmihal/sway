@@ -4,6 +4,7 @@ use crate::error::*;
 use crate::source_map::SourceMap;
 
 use sway_types::span::Span;
+use sway_error::error::CompileError;
 
 use either::Either;
 use std::fmt;

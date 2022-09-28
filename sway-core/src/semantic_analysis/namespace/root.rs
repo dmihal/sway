@@ -6,6 +6,7 @@ use crate::{
 use super::{module::Module, namespace::Namespace, Path};
 
 use sway_types::Spanned;
+use sway_error::error::CompileError;
 
 use std::collections::VecDeque;
 

@@ -13,10 +13,11 @@ use crate::{
         TypedIntrinsicFunctionKind, TypedStorageDeclaration,
     },
     type_system::{to_typeinfo, TypeInfo},
-    CompileError, CompileWarning, Ident, TreeType, Warning,
+    CompileWarning, Ident, TreeType, Warning,
 };
 use petgraph::{prelude::NodeIndex, visit::Dfs};
 use std::collections::BTreeSet;
+use sway_error::error::CompileError;
 use sway_types::{span::Span, Spanned};
 
 impl ControlFlowGraph {

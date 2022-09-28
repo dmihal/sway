@@ -15,6 +15,7 @@ use derivative::Derivative;
 use fuel_tx::StorageSlot;
 use sway_ir::{Context, Module};
 use sway_types::{state::StateIndex, Span, Spanned};
+use sway_error::error::CompileError;
 
 #[derive(Clone, Debug, Derivative)]
 #[derivative(PartialEq, Eq)]

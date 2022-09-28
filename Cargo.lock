@@ -1528,6 +1528,7 @@ dependencies = [
  "serde_ignored",
  "serde_json",
  "sway-core",
+ "sway-error",
  "sway-types",
  "sway-utils",
  "toml",
@@ -1546,6 +1547,7 @@ dependencies = [
  "anyhow",
  "dirs 3.0.2",
  "sway-core",
+ "sway-error",
  "sway-types",
  "sway-utils",
  "tracing",
@@ -4203,6 +4205,7 @@ dependencies = [
  "sha2 0.9.9",
  "smallvec",
  "sway-ast",
+ "sway-error",
  "sway-ir",
  "sway-parse",
  "sway-types",
@@ -4211,6 +4214,20 @@ dependencies = [
  "tracing",
  "uint",
  "vec1",
+]
+
+[[package]]
+name = "sway-error"
+version = "0.24.5"
+dependencies = [
+ "extension-trait",
+ "num-bigint",
+ "num-traits",
+ "phf",
+ "sway-ast",
+ "sway-types",
+ "thiserror",
+ "unicode-xid",
 ]
 
 [[package]]
@@ -4248,6 +4265,7 @@ dependencies = [
  "serde",
  "serde_json",
  "sway-core",
+ "sway-error",
  "sway-types",
  "sway-utils",
  "swayfmt",
@@ -4267,6 +4285,7 @@ dependencies = [
  "num-traits",
  "phf",
  "sway-ast",
+ "sway-error",
  "sway-types",
  "thiserror",
  "unicode-xid",
@@ -4300,6 +4319,7 @@ dependencies = [
  "serde_ignored",
  "sway-ast",
  "sway-core",
+ "sway-error",
  "sway-parse",
  "sway-types",
  "thiserror",

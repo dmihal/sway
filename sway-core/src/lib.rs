@@ -5,7 +5,6 @@ mod asm_generation;
 mod asm_lang;
 mod build_config;
 mod concurrent_slab;
-pub mod constants;
 mod control_flow_analysis;
 mod convert_parse_tree;
 pub mod declaration_engine;
@@ -39,7 +38,8 @@ pub use crate::parse_tree::{
     Declaration, Expression, ParseModule, ParseProgram, TreeType, UseStatement, *,
 };
 
-pub use error::{CompileError, CompileResult, CompileWarning};
+pub use error::{CompileResult, CompileWarning};
+use sway_error::error::CompileError;
 use sway_types::{ident::Ident, span, Spanned};
 pub use type_system::*;
 
@@ -65,7 +65,7 @@ pub fn parse(input: Arc<str>, config: Option<&BuildConfig>) -> CompileResult<Par
 
 /// Parse a file with contents `src` at `path`.
 fn parse_file(src: Arc<str>, path: Option<Arc<PathBuf>>) -> CompileResult<sway_ast::Module> {
-    let handler = sway_parse::handler::Handler::default();
+    let handler = sway_error::handler::Handler::default();
     match sway_parse::parse_file(&handler, src, path) {
         Ok(module) => ok(
             module,
@@ -178,11 +178,11 @@ fn module_path(parent_module_dir: &Path, dep: &sway_ast::Dependency) -> PathBuf 
         .iter()
         .chain(dep.path.span().as_str().split('/').map(AsRef::as_ref))
         .collect::<PathBuf>()
-        .with_extension(crate::constants::DEFAULT_FILE_EXTENSION)
+        .with_extension(sway_types::constants::DEFAULT_FILE_EXTENSION)
 }
 
 fn parse_file_error_to_compile_errors(
-    handler: sway_parse::handler::Handler,
+    handler: sway_error::handler::Handler,
     error: Option<sway_parse::ParseFileError>,
 ) -> Vec<CompileError> {
     match error {
@@ -412,7 +412,7 @@ pub(crate) fn compile_ast_to_ir_to_asm(
         .iter()
         .filter_map(|(idx, fc)| {
             if (matches!(tree_type, TreeType::Script | TreeType::Predicate)
-                && fc.name == crate::constants::DEFAULT_ENTRY_POINT_FN_NAME)
+                && fc.name == sway_types::constants::DEFAULT_ENTRY_POINT_FN_NAME)
                 || (tree_type == TreeType::Contract && fc.selector.is_some())
             {
                 Some(::sway_ir::function::Function(idx))

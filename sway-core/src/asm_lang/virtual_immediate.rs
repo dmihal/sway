@@ -1,5 +1,5 @@
-use crate::error::*;
 use sway_types::span::Span;
+use sway_error::error::CompileError;
 
 use std::convert::TryInto;
 use std::fmt;

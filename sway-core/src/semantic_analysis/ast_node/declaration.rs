@@ -26,6 +26,7 @@ use crate::{
 use derivative::Derivative;
 use std::{borrow::Cow, fmt};
 use sway_types::{Ident, Span, Spanned};
+use sway_error::error::CompileError;
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum TypedDeclaration {

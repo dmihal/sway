@@ -1,5 +1,6 @@
 use derivative::Derivative;
 use sway_types::{Ident, Span};
+use sway_error::error::CompileError;
 
 use crate::{
     error::{err, ok},
@@ -8,7 +9,7 @@ use crate::{
         TypeCheckContext,
     },
     type_system::{insert_type, AbiName, TypeId},
-    AbiDeclaration, CompileError, CompileResult, FunctionDeclaration, TypeInfo,
+    AbiDeclaration, CompileResult, FunctionDeclaration, TypeInfo,
 };
 
 use super::{CreateTypeId, TypedTraitFn};
