@@ -3,7 +3,6 @@ use crate::{
     utils::map::byte_span::{ByteSpan, LeafSpans},
 };
 use ropey::Rope;
-use sway_error::handler::Handler;
 use std::{
     collections::BTreeMap,
     fmt::Write,
@@ -15,7 +14,8 @@ use sway_ast::{
     token::{Comment, CommentedTokenTree, CommentedTree},
     Module,
 };
-use sway_parse::lex_commented;
+use sway_error::handler::Handler;
+use sway_parse::{lex_commented, ParseFileError};
 use sway_types::Spanned;
 
 use super::byte_span;
@@ -52,7 +52,8 @@ pub fn comment_map_from_src(input: Arc<str>) -> Result<CommentMap, FormatterErro
     // FIXME: Pass on handler errors.
     // Pass the input through the lexer.
     let handler = Handler::default();
-    let commented_token_stream = lex_commented(&handler, &input, 0, input.len(), None)?;
+    let commented_token_stream = lex_commented(&handler, &input, 0, input.len(), None)
+        .map_err(|_| ParseFileError(handler.into_errors()))?;
     let tts = commented_token_stream.token_trees().iter();
 
     for comment in tts {
