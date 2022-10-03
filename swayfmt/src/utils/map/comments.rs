@@ -3,6 +3,7 @@ use crate::{
     utils::map::byte_span::{ByteSpan, LeafSpans},
 };
 use ropey::Rope;
+use sway_error::handler::Handler;
 use std::{
     collections::BTreeMap,
     fmt::Write,
@@ -48,8 +49,10 @@ impl CommentRange for CommentMap {
 pub fn comment_map_from_src(input: Arc<str>) -> Result<CommentMap, FormatterError> {
     let mut comment_map = BTreeMap::new();
 
-    // pass the input through lexer
-    let commented_token_stream = lex_commented(&input, 0, input.len(), None)?;
+    // FIXME: Pass on handler errors.
+    // Pass the input through the lexer.
+    let handler = Handler::default();
+    let commented_token_stream = lex_commented(&handler, &input, 0, input.len(), None)?;
     let tts = commented_token_stream.token_trees().iter();
 
     for comment in tts {
