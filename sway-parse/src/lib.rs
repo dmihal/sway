@@ -34,14 +34,14 @@ use std::{path::PathBuf, sync::Arc};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Error)]
 #[error("Unable to parse: {}", self.0.iter().map(|x| x.to_string()).collect::<Vec<String>>().join("\n"))]
-pub struct ParseFileErrorStandalone(Vec<CompileError>);
+pub struct ParseFileError(Vec<CompileError>);
 
 pub fn parse_file_standalone(
     src: Arc<str>,
     path: Option<Arc<PathBuf>>,
-) -> Result<Module, ParseFileErrorStandalone> {
+) -> Result<Module, ParseFileError> {
     let handler = Handler::default();
-    parse_file(&handler, src, path).map_err(|_| ParseFileErrorStandalone(handler.into_errors()))
+    parse_file(&handler, src, path).map_err(|_| ParseFileError(handler.into_errors()))
 }
 
 pub fn parse_file(
