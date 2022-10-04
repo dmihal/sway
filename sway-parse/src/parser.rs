@@ -8,7 +8,7 @@ use sway_ast::token::{
 };
 use sway_ast::PubToken;
 use sway_error::error::CompileError;
-use sway_error::handler::{Handler, ErrorEmitted};
+use sway_error::handler::{ErrorEmitted, Handler};
 use sway_error::parser_error::{ParseError, ParseErrorKind};
 use sway_types::{Ident, Span, Spanned};
 

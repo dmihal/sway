@@ -16,8 +16,8 @@ use crate::{
     semantic_analysis::*,
     type_system::{look_up_type_id, to_typeinfo, IntegerBits, TypeId, TypeInfo},
 };
-use sway_error::error::{CompileError, Hint};
 use sway_ast::intrinsics::Intrinsic;
+use sway_error::error::{CompileError, Hint};
 use sway_ir::{Context, *};
 use sway_types::{
     constants,

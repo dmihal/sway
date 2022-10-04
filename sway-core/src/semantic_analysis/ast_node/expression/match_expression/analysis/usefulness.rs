@@ -1,5 +1,5 @@
-use sway_types::Span;
 use sway_error::error::CompileError;
+use sway_types::Span;
 
 use crate::{
     error::{err, ok},

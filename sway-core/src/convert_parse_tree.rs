@@ -50,7 +50,7 @@ use {
         Traits, Ty, TypeField, UseTree, WhereClause,
     },
     sway_types::{Ident, Span, Spanned},
-    };
+};
 
 #[derive(Debug, Default)]
 /// Contains any errors or warnings that were generated during the conversion into the parse tree.

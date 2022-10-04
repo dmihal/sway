@@ -11,10 +11,10 @@ use std::path::{Path, PathBuf};
 use std::str;
 use std::{env, io};
 use sway_core::{CompileWarning, TreeType};
+use sway_error::error::CompileError;
 use sway_types::span::LineCol;
 use sway_types::Spanned;
 use sway_utils::constants;
-use sway_error::error::CompileError;
 use tracing::{Level, Metadata};
 use tracing_subscriber::{
     filter::{EnvFilter, LevelFilter},

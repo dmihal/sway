@@ -4,9 +4,9 @@ use crate::{
     parse_tree::{promote_purity, Purity},
 };
 
+use sway_error::error::CompileError;
 use sway_ir::{Context, Function, Instruction, ValueDatum};
 use sway_types::span::Span;
-use sway_error::error::CompileError;
 
 use std::collections::HashMap;
 

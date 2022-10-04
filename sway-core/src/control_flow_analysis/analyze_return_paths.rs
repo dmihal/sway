@@ -9,8 +9,8 @@ use crate::{
     type_system::*,
 };
 use petgraph::prelude::NodeIndex;
-use sway_types::{ident::Ident, span::Span, Spanned};
 use sway_error::error::CompileError;
+use sway_types::{ident::Ident, span::Span, Spanned};
 
 impl ControlFlowGraph {
     pub(crate) fn construct_return_path_graph(

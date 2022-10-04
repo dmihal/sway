@@ -1,7 +1,7 @@
 use crate::{error::*, semantic_analysis::*, type_system::*};
 
-use sway_types::{ident::Ident, span::Span, JsonTypeDeclaration, Spanned};
 use sway_error::error::CompileError;
+use sway_types::{ident::Ident, span::Span, JsonTypeDeclaration, Spanned};
 
 use std::{
     fmt,

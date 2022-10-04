@@ -5,9 +5,9 @@ use crate::{
 
 use super::types::{create_enum_aggregate, create_tuple_aggregate};
 
+use sway_error::error::CompileError;
 use sway_ir::{Aggregate, Constant, Context, Type, Value};
 use sway_types::span::Span;
-use sway_error::error::CompileError;
 
 pub(super) fn convert_literal_to_value(context: &mut Context, ast_literal: &Literal) -> Value {
     match ast_literal {

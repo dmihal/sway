@@ -23,11 +23,11 @@ use std::{
     path::{Path, PathBuf},
     str::FromStr,
 };
-use sway_error::error::CompileError;
 use sway_core::{
-    semantic_analysis::namespace, source_map::SourceMap, BytecodeOrLib,
-    CompileResult, ParseProgram, TreeType, TypedProgram,
+    semantic_analysis::namespace, source_map::SourceMap, BytecodeOrLib, CompileResult,
+    ParseProgram, TreeType, TypedProgram,
 };
+use sway_error::error::CompileError;
 use sway_types::{Ident, JsonABIProgram, JsonTypeApplication, JsonTypeDeclaration};
 use sway_utils::constants;
 use tracing::{info, warn};

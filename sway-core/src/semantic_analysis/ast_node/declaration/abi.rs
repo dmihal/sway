@@ -1,6 +1,6 @@
 use derivative::Derivative;
-use sway_types::{Ident, Span};
 use sway_error::error::CompileError;
+use sway_types::{Ident, Span};
 
 use crate::{
     error::{err, ok},

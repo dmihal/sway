@@ -1,4 +1,4 @@
-use crate::{type_system::*};
+use crate::type_system::*;
 
 use sway_error::error::CompileError;
 use sway_types::span;
