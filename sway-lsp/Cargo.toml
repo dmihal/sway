@@ -20,7 +20,7 @@ sway-types = { version = "0.24.5", path = "../sway-types" }
 sway-utils = { version = "0.24.5", path = "../sway-utils" }
 swayfmt = { version = "0.24.5", path = "../swayfmt" }
 tokio = { version = "1.3", features = ["io-std", "io-util", "macros", "net", "rt-multi-thread", "sync", "time"] }
-tower-lsp = "0.17"
+tower-lsp = { version = "0.17", features = ["proposed"] }
 tracing = "0.1"
 
 [dev-dependencies]
