@@ -148,9 +148,13 @@ impl Session {
         let locked = false;
         let offline = false;
 
+        eprintln!("URI = {:#?}", uri);
+
         // TODO: match on any errors and report them back to the user in a future PR
         if let Ok(manifest) = pkg::ManifestFile::from_dir(&manifest_dir) {
+            dbg!();
             if let Ok(plan) = pkg::BuildPlan::from_lock_and_manifest(&manifest, locked, offline) {
+                dbg!();
                 //we can then use them directly to convert them to a Vec<Diagnostic>
                 if let Ok(CompileResult {
                     value,
@@ -158,12 +162,14 @@ impl Session {
                     errors,
                 }) = pkg::check(&plan, true)
                 {
+                    dbg!();
                     // FIXME(Centril): Refactor parse_ast_to_tokens + parse_ast_to_typed_tokens
                     // due to the new API.
                     let (parsed, typed) = match value {
                         None => (None, None),
                         Some((pp, tp)) => (Some(pp), tp),
                     };
+
                     // First, populate our token_map with un-typed ast nodes.
                     let parsed_res = CompileResult::new(parsed, warnings.clone(), errors.clone());
                     let _ = self.parse_ast_to_tokens(parsed_res);
@@ -293,18 +299,26 @@ impl Session {
 
     pub fn token_definition_response(
         &self,
-        url: Url,
+        uri: Url,
         position: Position,
     ) -> Option<GotoDefinitionResponse> {
-        self.token_at_position(&url, position)
+        self.token_at_position(&uri, position)
             .and_then(|(_, token)| self.declared_token_ident(&token))
             .and_then(|decl_ident| {
                 let range = utils::common::get_range_from_span(&decl_ident.span());
                 match decl_ident.span().path() {
-                    Some(path) => match Url::from_file_path(path.as_ref()) {
-                        Ok(url) => Some(GotoDefinitionResponse::Scalar(Location::new(url, range))),
-                        Err(_) => None,
-                    },
+                    Some(path) => {
+                        // If path is part of the users workspace, then convert URL from temp to workspace dir.
+                        // Otherwise, pass through if it points to a dependency path
+                        const LSP_TEMP_PREFIX: &str = "SWAY_LSP_TEMP_DIR";
+                        if uri.as_ref().contains("LSP_TEMP_PREFIX") {}
+                        match Url::from_file_path(path.as_ref()) {
+                            Ok(url) => {
+                                Some(GotoDefinitionResponse::Scalar(Location::new(url, range)))
+                            }
+                            Err(_) => None,
+                        }
+                    }
                     None => None,
                 }
             })
