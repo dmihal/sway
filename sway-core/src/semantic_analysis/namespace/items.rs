@@ -9,7 +9,7 @@ use crate::{
 
 use super::TraitMap;
 
-use sway_types::{span::Span, Spanned};
+use sway_types::{span::Span, state::StateIndex, Spanned};
 
 use std::sync::Arc;
 
@@ -23,7 +23,7 @@ pub(crate) enum GlobImport {
 pub(super) type SymbolMap = im::OrdMap<Ident, TypedDeclaration>;
 pub(super) type UseSynonyms = im::HashMap<Ident, (Vec<Ident>, GlobImport)>;
 pub(super) type UseAliases = im::HashMap<String, Ident>;
-pub(super) type StorageAliases = im::HashMap<String, Ident>;
+pub(super) type StorageIndexMap = im::HashMap<StateIndex, StateIndex>;
 
 /// The set of items that exist within some lexical scope via declaration or importing.
 #[derive(Clone, Debug, Default, PartialEq)]
@@ -44,7 +44,7 @@ pub struct Items {
     /// If there is a storage declaration (which are only valid in contracts), store it here.
     pub(crate) declared_storage: Option<DeclarationId>,
     /// Links between storage variables in libraries in storage variables in contracts.
-    pub(crate) storage_aliases: StorageAliases,
+    pub(crate) storage_index_map: StorageIndexMap,
 }
 
 impl Items {
